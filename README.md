@@ -1,4 +1,6 @@
-Please take input in this formate 
+<h3>***In branch 'master' you can find all the code repository***</h3>
+
+#Please take input in this formate 
 
 ```
 1 imported bottle of perfume at 27.99
@@ -8,7 +10,7 @@ Please take input in this formate
 done
 ```
 
-And output will be in this format
+#And output will be in this format
 
 ```
 1 imported bottle of perfume: 32.19
@@ -18,6 +20,8 @@ And output will be in this format
 Sales Taxes: 6.70
 Total: 74.68
 ```
+
+#If you want to exit the CI enter 'exit'
 
 Test cases are in this path 
 ```
