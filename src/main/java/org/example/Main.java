@@ -10,25 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Please give input like this
- * 1 book at 12.49
- * 1 music CD at 14.99
- * 1 chocolate bar at 0.85
- * done
- * And
- * We will see output like this
- * 1 book: 12.49
- * 1 music CD: 16.49
- * 1 chocolate bar: 0.85
- * Sales Taxes: 1.50
- * Total: 29.83
- *
- * If you want to exit the command line enter 'exit'
- *
- * Have added test cases refer to src/test/java/org/example/service/TaxCalculatorServiceTest.java
- */
-
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
