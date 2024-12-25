@@ -1,9 +1,10 @@
 package org.example;
 
-import org.example.model.ProductModel;
-import org.example.model.ReceiptModel;
-import org.example.repository.ReceiptRepository;
-import org.example.service.TaxCalculatorService;
+import org.example.model.Item;
+import org.example.model.PurchaseSummary;
+import org.example.service.Invoice;
+import org.example.service.ReceiptPrinter;
+import org.example.service.TaxCalculator;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,11 +14,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        TaxCalculatorService taxCalculatorService = new TaxCalculatorService();
+        TaxCalculator taxCalculator = new TaxCalculator();
 
         while (true) {
             System.out.println("Enter items for the basket (or type 'done' to finish and print receipt, 'exit' to quit):");
-            List<ProductModel> basket = new ArrayList<>();
+            List<Item> basket = new ArrayList<>();
 
             while (true) {
                 String input = scanner.nextLine();
@@ -31,25 +32,26 @@ public class Main {
                 }
 
                 try {
-                    ProductModel productModel = parseInput(input);
-                    basket.add(productModel);
+                    Item item = parseInput(input);
+                    basket.add(item);
                 } catch (IllegalArgumentException e) {
                     System.out.println("Invalid input format. Please try again.");
                 }
             }
 
-            ReceiptRepository receiptRepository = new ReceiptRepository();
-            for (ProductModel productModel : basket) {
-                BigDecimal tax = taxCalculatorService.calculateTax(productModel);
-                BigDecimal totalPrice = productModel.getPrice().add(tax);
-                receiptRepository.addItem(new ReceiptModel(productModel, tax, totalPrice));
+            Invoice invoice = new Invoice();
+            for (Item item : basket) {
+                BigDecimal tax = taxCalculator.calculateTax(item);
+                BigDecimal totalPrice = item.getPrice().add(tax);
+                invoice.addItem(new PurchaseSummary(item, tax, totalPrice));
             }
 
-            receiptRepository.printReceipt();
+            ReceiptPrinter printer = new ReceiptPrinter(invoice);
+            printer.printReceipt();
         }
     }
 
-    private static ProductModel parseInput(String input) {
+    private static Item parseInput(String input) {
         String[] parts = input.split(" at ");
         if (parts.length != 2) {
             throw new IllegalArgumentException("Invalid input format.");
@@ -61,6 +63,6 @@ public class Main {
         boolean isImported = namePart.toLowerCase().contains("imported");
         boolean isExempt = namePart.toLowerCase().matches(".*(book|chocolate|pill).*");
 
-        return new ProductModel(namePart.trim(), price, isImported, isExempt);
+        return new Item(namePart.trim(), price, isImported, isExempt);
     }
 }

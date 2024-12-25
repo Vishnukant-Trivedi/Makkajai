@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ProductModel {
+public class Item {
     @NotNull
     private final String name;
     @NotNull
