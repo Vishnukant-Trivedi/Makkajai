@@ -26,4 +26,5 @@ Total: 74.68
 Test cases are in this path 
 ```
 src/test/java/org/example/service/TaxCalculatorServiceTest.java
+src/test/java/org/example/service/TaxCalculatorIntegrationTest.java
 ```
