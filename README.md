@@ -1,4 +1,4 @@
-<h3>***In branch 'master' you can find all the code repository***</h3>
+<h3>***In branch 'Main' you can find all the code repository***</h3>
 
 #Please take input in this formate 
 
